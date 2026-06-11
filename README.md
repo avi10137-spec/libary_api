@@ -90,8 +90,17 @@ total borrows נשאר ללא שינוי
 ````
 ## requirment run
 ````
-הורדת חבילת התקנות 
-הרצת docker 
-mysql container
+תעשה clone לקובץ
+תעלה את הdocker 
+תריץ את הפקודות
+docker run --name libary-mysql\
+-e MYSQL_ROOT_PASSWORD=user \
+-e MYSQL_DATABASE=libary_db \
+-p 3306:3306 \
+-d mysql:8
+תבדוק שהdocker רץ
+docker ps
+תריץ חיבור 
+docker exec -it libary-mysql mysql -uroot -user
 docker start 
 uvicorn run main.app app --relode
