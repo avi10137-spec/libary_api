@@ -2,10 +2,10 @@
 
 ## projekt description
 ````
-המערכת צריכה ליצור אפשרות לניהול ספריה
-מטפלת בניהול של ספרים ומנויים עדכון והוספה 
-הבקשות יקרו דרך בקשות http בלבד 
-דרך חיבור למסד sql 
+The system should create a library management option
+Handles the management of books and subscriptions, updating and adding 
+Requests will be made via http requests only 
+Through a connection to a sql database
 ## docker code run
 ````
 docker run --name libary-mysql
@@ -44,18 +44,18 @@ id,name,email,is_active,total_borrows
 ````
 ## role system
 ````
-1.יצירת ספר המשתמש שולח enre/author/title המערכת מוסיפה
+.yetzirat sper hameshtamesh shulch enre/author/title hama'arkat musifa
 is_available=True, borrowed_by=NULL
-2.כל ערך חייב להיות Fiction / Non-Fiction / Science / History / Other
-אחר מחזיר שגיאה ערך  
-יש לוודא הן בהוספה או בעידכון
-3.יצירת מנוי המשתמש שולח name/email המערכת מוסיפה is_active=True
+2.kel arech hayev lehayot Fiction / Non-Fiction / Science / History / Other
+achar mechzir shgi'a arech  
+yesh levade hen behosfa o be'idkun
+3.yetzirat menuy hameshtamesh shulch name/email hama'arkat musifa is_active=True
 total_borrows=0
-4.email חייב להיות ייחודי אם קיים מחזיר שגיאה
-5.מנוי ל א פעיל אם is_active=False אי אפשר להשאיל ספר
-6. ספר לא זמין אם is_available=False אי אפשר להשאיל
-7. מנוי לא יכול להחזיק יותר מ3 ספרים
-8. החזרת ספר מתאפשרת רק אם הוא מושאל לאותו חבר שמחזיק בו
+4.email hayev lehayot yihudi am kiyim mechzir shgi'a
+5.menuy le a pa'il am is_active=False i efsher lehish'il sper
+6. sper le zmin am is_available=False i efsher lehish'il
+7. menuy le yechul lehachzik yoter me3 sifrim
+8. hachzeret sper mitafshret rek am hu mushe'el le'uto haver shmachzik bo
 ````
 ##  endpoint list
 ````
@@ -77,30 +77,33 @@ get | /reports/top_member
 ````
 ## flow system
 ````
-המערכת צריכה ליצור חבר על ידי בקשת post עם השדות המתאימים
-מערכת צריכה ליצור ספר על ידי בקשת post עם השדות המתאימים
-המערכת עושה פעולת השאלה על ידי בקשת put לפי פרטי ספר וחבר 
-המערכת מוודאת is_available = False
+The system should create a member by requesting a post with the appropriate fields
+The system should create a book by requesting a post with the appropriate fields
+The system performs a query by requesting a put with the details of the book and member
+The system verifies is_available = False
 borrowed_by_member_id = member_id
 total_borrows + 1
-המערכת מחזירה ספר בבקשת put על ידי שדות של חבר וספר
-המערכת מוודאת  is_available = True
+The system returns a book by requesting a put with the fields of the member and book
+The system verifies is_available = True
 borrowed_by_member_id = NULL
-total borrows נשאר ללא שינוי
+total borrows remains unchanged
 ````
 ## requirment run
 ````
-תעשה clone לקובץ
-תעלה את הdocker 
-תריץ את הפקודות
+Clone the file
+Upload the docker 
+Run the commands
 docker run --name libary-mysql\
 -e MYSQL_ROOT_PASSWORD=user \
 -e MYSQL_DATABASE=libary_db \
 -p 3306:3306 \
 -d mysql:8
-תבדוק שהdocker רץ
+Check that docker is running
 docker ps
-תריץ חיבור 
+Run a connection 
 docker exec -it libary-mysql mysql -uroot -user
 docker start 
 uvicorn run main.app app --relode
+run the server :
+http:/127.0.0.1:8000/docs
+````
